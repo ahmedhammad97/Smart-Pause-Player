@@ -1,4 +1,5 @@
 const { app, BrowserWindow } = require('electron');
+const { ipcMain } = require('electron');
 
 app.whenReady().then(() => {
     const win = new BrowserWindow({
@@ -7,8 +8,11 @@ app.whenReady().then(() => {
         }
     });
     
-    win.loadFile('./views/index.html');
-    win.maximize();
+    win.loadFile('./views/intro/intro.html');
+
+    ipcMain.on('maximizeScreen', (event, arg) => {
+      win.maximize();
+    });
 });
 
 

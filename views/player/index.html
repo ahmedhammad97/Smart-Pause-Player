@@ -1,0 +1,26 @@
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Smart Pause Player</title>
+    <link rel="stylesheet" href="./styles.css">
+    <link rel="stylesheet" href="./plyr.css" />
+    <script src="../../libs/plyr.polyfilled.js"></script>
+    <script src="../../libs/camvas.js"></script>
+    <script src="../../libs/pico.js"></script>
+    <script src="../../libs/lploc.js"></script>
+    <script src="../../libs/camdetect.js"></script>
+    <script src="messageBroker.js"></script>
+</head>
+<body>
+    
+    <main></main>
+
+    <div id="camview">
+		<p><canvas width=640 height=480></canvas></p>
+    </div>
+
+    <script src="player.js"></script>
+    <script> const player = new Plyr('#player'); button_callback()</script>
+    </body>
+</html>
