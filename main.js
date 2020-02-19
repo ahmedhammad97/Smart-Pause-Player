@@ -2,14 +2,13 @@ const { app, BrowserWindow } = require('electron');
 
 app.whenReady().then(() => {
     const win = new BrowserWindow({
-        width: 900,
-        height: 600,
         webPreferences: {
           nodeIntegration: true
         }
     });
     
     win.loadFile('./views/index.html');
+    win.maximize();
 });
 
 

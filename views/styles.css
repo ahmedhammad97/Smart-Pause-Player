@@ -1,0 +1,13 @@
+#camview {
+    text-align: center;
+    position: fixed;
+    bottom: 10px;
+    right: 10px;
+    opacity: 0;
+    cursor: pointer;
+}
+
+#camview:hover {
+    opacity: 0.8;
+    transition: all 1 ease-in-out;
+}
