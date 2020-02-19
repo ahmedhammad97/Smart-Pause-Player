@@ -3,8 +3,12 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Smart Pause Player</title>
-    <link rel="stylesheet" href="https://cdn.plyr.io/3.5.10/plyr.css" />
-    <script src="https://cdn.plyr.io/3.5.10/plyr.polyfilled.js"></script>
+    <link rel="stylesheet" href="./plyr.css" />
+    <script src="../libs/plyr.polyfilled.js"></script>
+    <script src="../libs/camvas.js"></script>
+    <script src="../libs/pico.js"></script>
+    <script src="../libs/lploc.js"></script>
+    <script src="../libs/camdetect.js"></script>
 </head>
 <body>
     <!--
@@ -22,8 +26,7 @@
         ></iframe>
     </div>
 
-    <script>
-        const player = new Plyr('#player');
-    </script>
-</body>
+    <script> const player = new Plyr('#player'); </script>
+
+    </body>
 </html>
