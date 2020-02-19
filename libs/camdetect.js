@@ -76,13 +76,8 @@ function button_callback() {
         // if it's above the threshold, draw it
         // (the constant 50.0 is empirical: other cascades might require a different one)
         if(dets[0] && dets[0][3]>70.0)
-        {
-            if (state === "pause" && player.paused) {
-                player.play();
-                state = "play";
-            }
-            
-                let i = 0;
+        {            
+            let i = 0;
             var r, c, s;
             //
             ctx.beginPath();
@@ -114,6 +109,11 @@ function button_callback() {
             [r, c] = do_puploc(r, c, s, 63, image)
             if(r>=0 && c>=0)
             {
+                if (state === "pause" && player.paused) {
+                    player.play();
+                    state = "play";
+                }
+
                 ctx.beginPath();
                 ctx.arc(c, r, 1, 0, 2*Math.PI, false);
                 ctx.lineWidth = 3;
