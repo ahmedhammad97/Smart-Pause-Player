@@ -1,4 +1,5 @@
 var initialized = false;
+var state = "pause"
 function button_callback() {
     /*
         (0) check whether we're already running face detection
@@ -76,8 +77,12 @@ function button_callback() {
         // (the constant 50.0 is empirical: other cascades might require a different one)
         if(dets[0] && dets[0][3]>70.0)
         {
-            player.play();
-            let i = 0;
+            if (state === "pause" && player.paused) {
+                player.play();
+                state = "play";
+            }
+            
+                let i = 0;
             var r, c, s;
             //
             ctx.beginPath();
@@ -116,7 +121,12 @@ function button_callback() {
                 ctx.stroke();
             }
         }
-        else player.pause()
+        else {
+            if (state === "play" && player.playing) {
+                player.pause();
+                state = "pause";    
+            }
+        }
     }
     /*
         (5) instantiate camera handling (see https://github.com/cbrandolino/camvas)
