@@ -8,6 +8,7 @@ app.whenReady().then(() => {
         }
     });
     
+    win.removeMenu();
     win.loadFile('./views/intro/intro.html');
 
     ipcMain.on('maximizeScreen', (event, arg) => {
