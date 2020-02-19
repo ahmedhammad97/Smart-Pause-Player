@@ -8,7 +8,7 @@ function button_callback() {
     /*
         (1) initialize the pico.js face detector
     */
-    var update_memory = pico.instantiate_detection_memory(5); // we will use the detecions of the last 5 frames
+    var update_memory = pico.instantiate_detection_memory(25); // we will use the detecions of the last 5 frames
     var facefinder_classify_region = function(r, c, s, pixels, ldim) {return -1.0;};
     var cascadeurl = 'https://raw.githubusercontent.com/nenadmarkus/pico/c2e81f9d23cc11d1a612fd21e4f9de0921a5d0d9/rnt/cascades/facefinder';
     fetch(cascadeurl).then(function(response) {
@@ -70,50 +70,53 @@ function button_callback() {
         dets = update_memory(dets);
         dets = pico.cluster_detections(dets, 0.2); // set IoU threshold to 0.2
         // draw detections
-        for(i=0; i<dets.length; ++i)
-            // check the detection score
-            // if it's above the threshold, draw it
-            // (the constant 50.0 is empirical: other cascades might require a different one)
-            if(dets[i][3]>50.0)
+
+        // check the detection score
+        // if it's above the threshold, draw it
+        // (the constant 50.0 is empirical: other cascades might require a different one)
+        if(dets[0] && dets[0][3]>70.0)
+        {
+            player.play();
+            let i = 0;
+            var r, c, s;
+            //
+            ctx.beginPath();
+            ctx.arc(dets[i][1], dets[i][0], dets[i][2]/2, 0, 2*Math.PI, false);
+            ctx.lineWidth = 3;
+            ctx.strokeStyle = 'red';
+            ctx.stroke();
+            //
+            // find the eye pupils for each detected face
+            // starting regions for localization are initialized based on the face bounding box
+            // (parameters are set empirically)
+            // first eye
+            r = dets[i][0] - 0.075*dets[i][2];
+            c = dets[i][1] - 0.175*dets[i][2];
+            s = 0.35*dets[i][2];
+            [r, c] = do_puploc(r, c, s, 63, image)
+            if(r>=0 && c>=0)
             {
-                var r, c, s;
-                //
                 ctx.beginPath();
-                ctx.arc(dets[i][1], dets[i][0], dets[i][2]/2, 0, 2*Math.PI, false);
+                ctx.arc(c, r, 1, 0, 2*Math.PI, false);
                 ctx.lineWidth = 3;
                 ctx.strokeStyle = 'red';
                 ctx.stroke();
-                //
-                // find the eye pupils for each detected face
-                // starting regions for localization are initialized based on the face bounding box
-                // (parameters are set empirically)
-                // first eye
-                r = dets[i][0] - 0.075*dets[i][2];
-                c = dets[i][1] - 0.175*dets[i][2];
-                s = 0.35*dets[i][2];
-                [r, c] = do_puploc(r, c, s, 63, image)
-                if(r>=0 && c>=0)
-                {
-                    ctx.beginPath();
-                    ctx.arc(c, r, 1, 0, 2*Math.PI, false);
-                    ctx.lineWidth = 3;
-                    ctx.strokeStyle = 'red';
-                    ctx.stroke();
-                }
-                // second eye
-                r = dets[i][0] - 0.075*dets[i][2];
-                c = dets[i][1] + 0.175*dets[i][2];
-                s = 0.35*dets[i][2];
-                [r, c] = do_puploc(r, c, s, 63, image)
-                if(r>=0 && c>=0)
-                {
-                    ctx.beginPath();
-                    ctx.arc(c, r, 1, 0, 2*Math.PI, false);
-                    ctx.lineWidth = 3;
-                    ctx.strokeStyle = 'red';
-                    ctx.stroke();
-                }
             }
+            // second eye
+            r = dets[i][0] - 0.075*dets[i][2];
+            c = dets[i][1] + 0.175*dets[i][2];
+            s = 0.35*dets[i][2];
+            [r, c] = do_puploc(r, c, s, 63, image)
+            if(r>=0 && c>=0)
+            {
+                ctx.beginPath();
+                ctx.arc(c, r, 1, 0, 2*Math.PI, false);
+                ctx.lineWidth = 3;
+                ctx.strokeStyle = 'red';
+                ctx.stroke();
+            }
+        }
+        else player.pause()
     }
     /*
         (5) instantiate camera handling (see https://github.com/cbrandolino/camvas)
