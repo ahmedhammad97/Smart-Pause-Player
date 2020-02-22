@@ -27,3 +27,14 @@ a {
     opacity: 0.8;
     transition: all 1 ease-in-out;
 }
+
+#back {
+    position: fixed;
+    top: 10px;
+    left: 10px;
+    opacity: 0.4;
+}
+
+#back:hover {
+    opacity: 0.9;
+}

@@ -3,7 +3,10 @@ const { ipcMain } = require('electron');
 
 app.whenReady().then(() => {
     const win = new BrowserWindow({
-        icon: './views/imgs/rubiks.png',
+        icon: './views/imgs/play.png',
+        width: 800,
+        height: 600,
+        fullscreen: false,
         webPreferences: {
           nodeIntegration: true
         }
@@ -14,6 +17,10 @@ app.whenReady().then(() => {
 
     ipcMain.on('maximizeScreen', (event, arg) => {
       win.maximize();
+    });
+
+    ipcMain.on('unmaximizeScreen', (event, args) => {
+      win.unmaximize();
     });
 });
 
