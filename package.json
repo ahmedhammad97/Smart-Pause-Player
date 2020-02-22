@@ -4,7 +4,15 @@
   "description": "A video player that monitors the user using the webcam, and undertands how much attention is he/she paying for the video, or still siting infront of the screen at all. Then it smartly decides to pause the video in occasions when the user is not paying attention to prevent him/her from missing any scenes.",
   "main": "main.js",
   "scripts": {
-    "start": "electron ."
+    "start": "electron .",
+    "pack": "electron-builder --dir",
+    "dist": "electron-builder"
+  },
+  "build": {
+    "appId": "SmartPausePlayer",
+    "mac": {
+      "category": "Video Player"
+    }
   },
   "keywords": [
     "smart",
@@ -16,6 +24,7 @@
   "author": "Ahmed Hammad",
   "license": "GPL-3.0-or-later",
   "dependencies": {
-    "electron": "^8.0.1"
+    "electron": "^8.0.1",
+    "electron-builder": "^22.3.2"
   }
 }
