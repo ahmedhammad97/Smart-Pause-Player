@@ -3,6 +3,7 @@ const { ipcMain } = require('electron');
 
 app.whenReady().then(() => {
     const win = new BrowserWindow({
+        icon: './views/imgs/rubiks.png',
         webPreferences: {
           nodeIntegration: true
         }
