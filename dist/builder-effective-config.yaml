@@ -1,0 +1,7 @@
+directories:
+  output: dist
+  buildResources: build
+appId: SmartPausePlayer
+mac:
+  category: Video Player
+electronVersion: 8.0.1
