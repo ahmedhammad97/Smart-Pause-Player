@@ -24,7 +24,7 @@
   "author": "Ahmed Hammad",
   "license": "GPL-3.0-or-later",
   "devDependencies": {
-    "electron": "^8.0.1",
+    "electron": "^11.5.0",
     "electron-builder": "^22.3.2"
   }
 }
